@@ -112,6 +112,15 @@ while [[ $# > 0 ]];do
         --usemysql)
         USEMYSQL="$2"
         ;;
+        --ldns)
+        LDNS="$2"
+        ;;
+        --cfkey)
+        CFKEY="$2"
+        ;;
+        --cfemail)
+        CFEMAIL="$2"
+        ;;
         *)
                 # unknown option
         ;;
@@ -237,7 +246,7 @@ getVersion(){
         if [[ ${CUR_VER} != v* ]]; then
             CUR_VER=v${CUR_VER}
         fi
-        TAG_URL="https://api.github.com/repos/rico93/pay-v2ray-sspanel-v3-mod_Uim-plugin/releases/latest"
+        TAG_URL="https://api.github.com/repos/v2rayv3/pay-v2ray-sspanel-v3-mod_Uim-plugin/releases/latest"
         NEW_VER=`curl ${PROXY} -s ${TAG_URL} --connect-timeout 10| grep 'tag_name' | cut -d\" -f4`
         if [[ ${NEW_VER} != v* ]]; then
           NEW_VER=v${NEW_VER}
@@ -395,7 +404,21 @@ installV2Ray(){
                 colorEcho ${BLUE} "USEMYSQL:${USEMYSQL}"
 
         fi
-
+        if [ ! -z "${LDNS}" ]
+        then
+                sed -i "s|\"localhost\"|\"${LDNS}\"|g" "/etc/v2ray/config.json"
+                 colorEcho ${BLUE} "DNS:${LDNS}"
+        fi
+        if [ ! -z "${CFKEY}" ]
+        then
+          sed -i "s|\"bbbbbbbbbbbbbbbbbb\"|\"${CFKEY}\"|g" "/etc/v2ray/config.json"
+            colorEcho ${BLUE} "CFKEY:${CFKEY}"
+        fi
+        if [ ! -z "${CFEMAIL}" ]
+        then
+          sed -i "s|\"rico93@outlxxxxxxxxxx.com\"|\"${CFEMAIL}\"|g" "/etc/v2ray/config.json"
+            colorEcho ${BLUE} "CFEMAIL:${CFEMAIL}"
+        fi
 
     fi
     return 0
