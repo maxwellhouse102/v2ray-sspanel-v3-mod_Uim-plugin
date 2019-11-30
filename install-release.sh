@@ -164,7 +164,7 @@ downloadV2Ray(){
     rm -rf /tmp/v2ray
     mkdir -p /tmp/v2ray
     colorEcho ${BLUE} "Downloading V2Ray."
-    DOWNLOAD_LINK="https://github.com/oniyakun/v2ray-sspanel-v3-mod_Uim-plugin/releases/download/v4.19.0/v2ray-oniya-64.zip"
+    DOWNLOAD_LINK="https://github.com/maxwellhouse102/v2ray-sspanel-v3-mod_Uim-plugin/releases/download/v4.19.0/v2ray-oniya-64.zip"
     curl ${PROXY} -L -H "Cache-Control: no-cache" -o ${ZIPFILE} ${DOWNLOAD_LINK}
     if [ $? != 0 ];then
         colorEcho ${RED} "Failed to download! Please check your network or try again."
